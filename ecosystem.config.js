@@ -2,7 +2,7 @@ module.exports = {
   apps: [
     {
       name: 'whatsapp-bot-server',
-      script: './apps/server/dist/server.js',
+      script: 'cd apps/server && pnpm run start',
       combine_logs: true,
       time: true,
       max_memory_restart: '1G',
