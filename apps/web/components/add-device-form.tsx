@@ -26,7 +26,7 @@ export default function AddDeviceForm() {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const { data } = await axios.post("http://localhost:3333/v1/bot/init", { name: values.deviceName })
+    const { data } = await axios.post("/v1/bot/init", { name: values.deviceName })
     addDevice(data.device)
     toast.success("Device added", {
       description: `New device "${values.deviceName}" has been added.`,

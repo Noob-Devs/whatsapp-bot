@@ -20,13 +20,13 @@ export default function DeviceList(props: DeviceListProps) {
 
   const handleRemoveDevice = async (name: string) => {
     const device = devices.find(device => device.name === name)
-    await axios.delete(`http://localhost:3333/v1/bot/remove/${name}`)
+    await axios.delete(`/v1/bot/remove/${name}`)
     removeDevice(name)
     toast.success(`Device "${device?.name}" has been removed.`)
   }
 
   const handleQRCodeModal = async ({ name }: { name: Device['name'] }) => {
-    const qrcodeEventSource = new EventSource(`http://localhost:3333/v1/bot/qrcode/${name}`)
+    const qrcodeEventSource = new EventSource(`${process.env.NEXT_PUBLIC_API_URL}/v1/bot/qrcode/${name}`)
     qrcodeEventSource.onmessage = (event) => {
       const dataParsed = JSON.parse(event.data)
       if (dataParsed.qr) {
