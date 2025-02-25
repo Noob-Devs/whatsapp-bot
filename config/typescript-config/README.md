@@ -1,3 +1,3 @@
-# `@workspace/typescript-config`
+# `@whatsapp-bot/typescript-config`
 
 Shared typescript configuration for the workspace.
