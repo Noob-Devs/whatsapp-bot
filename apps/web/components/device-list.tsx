@@ -10,11 +10,7 @@ import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import { QRCodeModal } from "./qrcode-modal"
 
-interface DeviceListProps {
-  devices: Device[]
-}
-
-export default function DeviceList(props: DeviceListProps) {
+export default function DeviceList() {
   const { devices, removeDevice, setDevices, updateDevice } = useDevices()
   const [qrCode, setQrCode] = useState<string | null>(null)
 
@@ -61,8 +57,15 @@ export default function DeviceList(props: DeviceListProps) {
   }
 
   useEffect(() => {
-    setDevices(props.devices)
+    api.get('/bot/list').then(({ data }) => {
+      setDevices(data.bots)
+    })
+
   }, [])
+
+  if (!devices) {
+    return null
+  }
 
   return (
     <>

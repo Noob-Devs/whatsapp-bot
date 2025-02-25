@@ -18,10 +18,13 @@ interface DeviceContextData {
 export const DevicesContext = createContext({} as DeviceContextData);
 
 interface ReducerState {
-  devices: Array<Device>
+  devices?: Array<Device>
 }
 
 const reducer = (state: ReducerState, action: any): ReducerState => {
+  if (!state.devices) {
+    return state
+  }
   switch (action.type) {
     case "SET_DEVICES":
       return {
@@ -50,7 +53,6 @@ const reducer = (state: ReducerState, action: any): ReducerState => {
 
 export function DevicesProvider({ children }: { children: React.ReactNode }) {
   const [state, dispatch] = useReducer(reducer, { devices: [] });
-  
   const setDevices = (devices: Array<Device>) => {
     dispatch({
       type: "SET_DEVICES",
@@ -79,7 +81,7 @@ export function DevicesProvider({ children }: { children: React.ReactNode }) {
   }
 
   return <DevicesContext.Provider value={{
-    devices: state.devices,
+    devices: state.devices || [],
     setDevices,
     addDevice,
     removeDevice,

@@ -1,6 +1,5 @@
 import AddDeviceForm from "@/components/add-device-form"
 import DeviceList from "@/components/device-list"
-import { api } from "@/lib/axios"
 import type { Metadata } from "next"
 import { Toaster } from "sonner"
 
@@ -10,7 +9,6 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-  const { data: { bots } } = await api.get('/bot/list')
   return (
     <>
       <div className="container mx-auto px-4 py-8">
@@ -22,7 +20,7 @@ export default async function Home() {
           </div>
           <div>
             <h2 className="text-2xl font-semibold mb-4">Dispositivos</h2>
-            <DeviceList devices={bots} />
+            <DeviceList />
           </div>
         </div>
       </div>
