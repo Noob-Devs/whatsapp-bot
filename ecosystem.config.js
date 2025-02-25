@@ -9,7 +9,7 @@ module.exports = {
     },
     {
       name: 'whatsapp-bot-web',
-      script: 'cd apps/web && pnpm run start',
+      script: 'cd apps/web && pnpm run start --port=3713',
       combine_logs: true,
       time: true,
       max_memory_restart: '1G',
