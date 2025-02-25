@@ -5,7 +5,7 @@
   "main": "dist/server.js",
   "type": "module",
   "scripts": {
-    "build": "tsup src/*.ts --format esm --dts",
+    "build": "tsup src/*.ts --format esm --dts && cd dist && ln -s ../.env",
     "start": "node --env-file .env dist/server.js",
     "dev": "tsx watch --env-file .env src/server.ts"
   },
