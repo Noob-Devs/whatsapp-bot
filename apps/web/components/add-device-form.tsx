@@ -1,14 +1,14 @@
 "use client"
 
-import { useForm } from "react-hook-form"
+import { useDevices } from "@/contexts/devices"
+import { api } from "@/lib/axios"
 import { zodResolver } from "@hookform/resolvers/zod"
-import * as z from "zod"
 import { Button } from "@whatsapp-bot/ui/components/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@whatsapp-bot/ui/components/form"
 import { Input } from "@whatsapp-bot/ui/components/input"
+import { useForm } from "react-hook-form"
 import { toast } from "sonner"
-import axios from "axios"
-import { useDevices } from "@/contexts/devices"
+import * as z from "zod"
 
 const formSchema = z.object({
   deviceName: z.string().min(2, {
@@ -26,7 +26,7 @@ export default function AddDeviceForm() {
   })
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    const { data } = await axios.post("/v1/bot/init", { name: values.deviceName })
+    const { data } = await api.post("/bot/init", { name: values.deviceName })
     addDevice(data.device)
     toast.success("Device added", {
       description: `New device "${values.deviceName}" has been added.`,

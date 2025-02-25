@@ -1,14 +1,14 @@
 "use client"
 
 import { Device, useDevices } from "@/contexts/devices"
-import { Button } from "@whatsapp-bot/ui/components/button"
+import { api } from "@/lib/axios"
 import { Badge } from "@whatsapp-bot/ui/components/badge"
+import { Button } from "@whatsapp-bot/ui/components/button"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@whatsapp-bot/ui/components/table"
 import { QrCode, Trash2 } from "lucide-react"
 import { useEffect, useState } from "react"
 import { toast } from "sonner"
 import { QRCodeModal } from "./qrcode-modal"
-import axios from "axios"
 
 interface DeviceListProps {
   devices: Device[]
@@ -20,13 +20,13 @@ export default function DeviceList(props: DeviceListProps) {
 
   const handleRemoveDevice = async (name: string) => {
     const device = devices.find(device => device.name === name)
-    await axios.delete(`/v1/bot/remove/${name}`)
+    await api.delete(`/bot/remove/${name}`)
     removeDevice(name)
     toast.success(`Device "${device?.name}" has been removed.`)
   }
 
   const handleQRCodeModal = async ({ name }: { name: Device['name'] }) => {
-    const qrcodeEventSource = new EventSource(`${process.env.NEXT_PUBLIC_API_URL}/v1/bot/qrcode/${name}`)
+    const qrcodeEventSource = new EventSource(`${process.env.NEXT_PUBLIC_API_URL}/bot/qrcode/${name}`)
     qrcodeEventSource.onmessage = (event) => {
       const dataParsed = JSON.parse(event.data)
       if (dataParsed.qr) {
