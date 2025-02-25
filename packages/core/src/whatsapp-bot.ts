@@ -161,15 +161,15 @@ export class WhatsAppBot {
             message: {
               content: `${body.join('\n')}\n@everyone`,
             },
-            applied_tags: ['1293990170701336609'],
+            applied_tags: [process.env.DISCORD_TAG_ID!],
           })
 
           // Enviar a requisição GraphQL
           await createDiscussionInGithub({
             title: title || 'Sem título',
             body: `${body.join('\n')}\nhttps://discord.com/channels/${data.guild_id}/${data.id}`,
-            categoryId: 'DIC_kwDON-BNO84CnOyE',
-            repositoryId: 'R_kgDON-BNOw',
+            categoryId: process.env.GITHUB_DISCUSSION_CATEGORY_ID!,
+            repositoryId: process.env.GITHUB_REPOSITORY_ID!,
           })
 
           cardMesage = `${title}\n${body.join('\n')}`
