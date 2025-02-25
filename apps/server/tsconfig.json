@@ -1,0 +1,3 @@
+{
+  "extends": "@whatsapp-bot/typescript-config/base.json",
+}

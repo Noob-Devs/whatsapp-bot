@@ -1,0 +1,32 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/server.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsup src/*.ts --format esm --dts",
+    "start": "node --env-file .env dist/server.js",
+    "dev": "tsx watch --env-file .env src/server.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^22.13.5",
+    "@vitest/coverage-v8": "^3.0.6",
+    "@whatsapp-bot/eslint-config": "workspace:*",
+    "@whatsapp-bot/prettier": "workspace:*",
+    "@whatsapp-bot/typescript-config": "workspace:*",
+    "tsup": "^8.3.6",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.6"
+  },
+  "dependencies": {
+    "@fastify/cors": "^10.0.2",
+    "@whatsapp-bot/core": "workspace:*",
+    "fastify": "^5.2.1"
+  },
+  "prettier": "@whatsapp-bot/prettier"
+}
